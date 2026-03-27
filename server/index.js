@@ -29,7 +29,7 @@ const io = initializeSocket(server);
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://real-time-chat288.vercel.app'  // your exact Vercel URL
+    'https://rajgram28.vercel.app/'  // your exact Vercel URL
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
