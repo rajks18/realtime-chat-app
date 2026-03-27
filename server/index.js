@@ -21,10 +21,21 @@ const server = http.createServer(app);
 const io = initializeSocket(server);
 
 // app.use(cors({ origin: process.env.CLIENT_URL }));
+// app.use(cors({
+//   origin: ['http://localhost:5173', 'http://localhost:3000'],
+//   credentials: true,
+// }));
+
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000'],
+  origin: [
+    'http://localhost:5173',
+    'https://real-time-chat288.vercel.app'  // your exact Vercel URL
+  ],
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
 app.use(express.json());
 
 // Apply rate limiters
