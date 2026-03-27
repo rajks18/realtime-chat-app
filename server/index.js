@@ -26,11 +26,7 @@ const io = initializeSocket(server);
 //   credentials: true,
 // }));
 
-const allowedOrigins = [
-  'http://localhost:5173',
-  'https://real-time-chat288.vercel.app',
-  'https://rajgram28.vercel.app',
-];
+const allowedOrigins = require('./config/allowedOrigins');
 
 app.use(cors({
   origin: function (origin, callback) {
@@ -44,7 +40,6 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
-
 app.use(express.json());
 
 // Apply rate limiters

@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const User = require("./models/User");
 const Room = require("./models/Room");
 const Message = require("./models/Message");
+const allowedOrigins = require('./config/allowedOrigins');
 
 const initializeSocket = (server) => {
   const io = require("socket.io")(server, {
