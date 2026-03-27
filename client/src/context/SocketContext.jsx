@@ -1,4 +1,4 @@
- import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 import { useAuth } from './AuthContext';
 
@@ -10,10 +10,12 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      // Connect to socket with JWT token
-      const newSocket = io('http://localhost:5000', {
-        auth: { token: localStorage.getItem('token') },
-      });
+      const newSocket = io(
+        import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000',
+        {
+          auth: { token: localStorage.getItem('token') },
+        }
+      );
 
       newSocket.on('connect', () => {
         console.log('Socket connected!');
@@ -21,7 +23,6 @@ export const SocketProvider = ({ children }) => {
 
       setSocket(newSocket);
 
-      // Cleanup on logout
       return () => newSocket.disconnect();
     }
   }, [user]);
