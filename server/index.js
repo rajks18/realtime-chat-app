@@ -26,12 +26,20 @@ const io = initializeSocket(server);
 //   credentials: true,
 // }));
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://real-time-chat288.vercel.app',
+  'https://rajgram28.vercel.app',
+];
+
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'https://real-time-chat288.vercel.app',
-    'https://rajgram28.vercel.app'  // ← your new Vercel URL!
-  ],
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
